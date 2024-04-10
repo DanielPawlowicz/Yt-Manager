@@ -2,6 +2,10 @@ package com.Daniel.YtManagerBackend.model;
 
 import jakarta.persistence.*;
 
+import java.sql.Blob;
+import java.util.HashMap;
+import java.util.Map;
+
 @Entity
 @Table(name = "video")
 public class Video {
@@ -12,6 +16,27 @@ public class Video {
     private String link;
     private String duration;
     private String thumbnailUrl;
+    private String bookmark;
+    @Lob
+    private String note;
+    @ElementCollection
+    @CollectionTable(name = "timestamps", joinColumns = @JoinColumn(name = "video_id"))
+    @MapKeyColumn(name = "timestamp_index")
+    @AttributeOverrides({
+            @AttributeOverride(name = "description", column = @Column(name = "description")),
+            @AttributeOverride(name = "startTime", column = @Column(name = "start_time")),
+            @AttributeOverride(name = "endTime", column = @Column(name = "end_time"))
+    })
+    private Map<Integer, TimestampInfo> timestamps = new HashMap<>(); // Store timestamps as a map
+
+
+    public String getBookmark() {
+        return bookmark;
+    }
+
+    public void setBookmark(String bookmark) {
+        this.bookmark = bookmark;
+    }
 
     public Long getId() {
         return id;
