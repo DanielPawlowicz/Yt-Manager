@@ -29,15 +29,6 @@ public class Video {
     })
     private Map<Integer, TimestampInfo> timestamps = new HashMap<>(); // Store timestamps as a map
 
-
-    public String getBookmark() {
-        return bookmark;
-    }
-
-    public void setBookmark(String bookmark) {
-        this.bookmark = bookmark;
-    }
-
     public Long getId() {
         return id;
     }
@@ -77,4 +68,29 @@ public class Video {
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
     }
+
+    public String getBookmark() {
+        return bookmark;
+    }
+
+    public void setBookmark(String bookmark) {
+        this.bookmark = bookmark;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public Map<Integer, TimestampInfo> getTimestamps() {
+        return timestamps;
+    }
+
+    public void setTimestamps(Map<Integer, TimestampInfo> timestamps) {
+        this.timestamps = timestamps;
+    }
+
 }
