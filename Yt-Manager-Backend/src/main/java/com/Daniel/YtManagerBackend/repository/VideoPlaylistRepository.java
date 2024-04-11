@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface VideoPlaylistRepository extends JpaRepository<VideoPlaylist, Long> {
 
-    List<VideoPlaylist> findByPlaylistOrderByOrderIndexAsc(Playlist playlist);
+    List<VideoPlaylist> findByPlaylistIdOrderByOrderIndex(Long playlistId);
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/playlist/videos")
+@RequestMapping("/video-playlists")
 public class VideoPlaylistController {
     private final VideoPlaylistService videoPlaylistService;
 
@@ -19,17 +19,45 @@ public class VideoPlaylistController {
         this.videoPlaylistService = videoPlaylistService;
     }
 
-    @PostMapping
+    // add video-playlist
+    @PostMapping("/assign")
     public ResponseEntity<VideoPlaylist> addVideoToPlaylist(@RequestBody VideoPlaylist videoPlaylist) {
         VideoPlaylist savedVideoPlaylist = videoPlaylistService.saveVideoPlaylist(videoPlaylist);
         return new ResponseEntity<>(savedVideoPlaylist, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{playlistId}")
+    // get all video-playlists
+    @GetMapping("/all")
+    public ResponseEntity<List<VideoPlaylist>> getAllVideoPlaylists() {
+        List<VideoPlaylist> videoPlaylists = videoPlaylistService.getAllVideoPlaylists();
+        return ResponseEntity.ok(videoPlaylists);
+    }
+
+    // get all video-playlist by playlist id
+    @GetMapping("/allVideoFrom/{playlistId}")
     public ResponseEntity<List<VideoPlaylist>> getVideosByPlaylist(@PathVariable Long playlistId) {
-        Playlist playlist = new Playlist();
-        playlist.setId(playlistId);
-        List<VideoPlaylist> videos = videoPlaylistService.getVideosByPlaylist(playlist);
+        List<VideoPlaylist> videos = videoPlaylistService.getVideosByPlaylistOrderedByOrderIndex(playlistId);
         return new ResponseEntity<>(videos, HttpStatus.OK);
     }
+
+    // get specific video-playlist by id
+    @GetMapping("/one/{videoPlaylistId}")
+    public ResponseEntity<VideoPlaylist> getVideoPlaylistById(@PathVariable Long videoPlaylistId) {
+        VideoPlaylist videoPlaylist = videoPlaylistService.getVideoPlaylistById(videoPlaylistId);
+        return ResponseEntity.ok(videoPlaylist);
+    }
+
+    //
+    @PutMapping("/edit/{videoPlaylistId}")
+    public ResponseEntity<VideoPlaylist> updateVideoPlaylist(@PathVariable Long videoPlaylistId, @RequestBody VideoPlaylist videoPlaylist) {
+        VideoPlaylist updatedVideoPlaylist = videoPlaylistService.updateVideoPlaylist(videoPlaylistId, videoPlaylist);
+        return ResponseEntity.ok(updatedVideoPlaylist);
+    }
+
+    @DeleteMapping("/delete/{videoPlaylistId}")
+    public ResponseEntity<Void> deleteVideoPlaylist(@PathVariable Long videoPlaylistId) {
+        videoPlaylistService.deleteVideoPlaylist(videoPlaylistId);
+        return ResponseEntity.noContent().build();
+    }
+
 }

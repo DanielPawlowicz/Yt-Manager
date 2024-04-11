@@ -9,11 +9,9 @@ public class VideoPlaylist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
     @JoinColumn(name = "video_id")
     private Long videoId;
 
-    @ManyToOne
     @JoinColumn(name = "playlist_id")
     private Long playlistId;
 
