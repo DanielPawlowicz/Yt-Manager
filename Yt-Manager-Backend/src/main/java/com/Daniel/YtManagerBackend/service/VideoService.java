@@ -41,6 +41,7 @@ public class VideoService {
         existingVideo.setBookmark(video.getBookmark());
         existingVideo.setNote(video.getNote());
         existingVideo.setTimestamps(video.getTimestamps());
+        existingVideo.setWatched(video.getWatched());
 
         return videoRepository.save(existingVideo);
     }

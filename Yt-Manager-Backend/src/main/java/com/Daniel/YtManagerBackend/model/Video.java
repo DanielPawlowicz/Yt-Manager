@@ -28,6 +28,7 @@ public class Video {
             @AttributeOverride(name = "endTime", column = @Column(name = "end_time"))
     })
     private Map<Integer, TimestampInfo> timestamps = new HashMap<>(); // Store timestamps as a map
+    private boolean watched;
 
     public Long getId() {
         return id;
@@ -93,4 +94,11 @@ public class Video {
         this.timestamps = timestamps;
     }
 
+    public boolean getWatched() {
+        return watched;
+    }
+
+    public void setWatched(boolean watched) {
+        this.watched = watched;
+    }
 }
