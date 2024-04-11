@@ -11,11 +11,11 @@ public class VideoPlaylist {
 
     @ManyToOne
     @JoinColumn(name = "video_id")
-    private Video video;
+    private Long videoId;
 
     @ManyToOne
     @JoinColumn(name = "playlist_id")
-    private Playlist playlist;
+    private Long playlistId;
 
     private int orderIndex;
 
@@ -27,20 +27,20 @@ public class VideoPlaylist {
         this.id = id;
     }
 
-    public Video getVideo() {
-        return video;
+    public Long getVideoId() {
+        return videoId;
     }
 
-    public void setVideo(Video video) {
-        this.video = video;
+    public void setVideoId(Long videoId) {
+        this.videoId = videoId;
     }
 
-    public Playlist getPlaylist() {
-        return playlist;
+    public Long getPlaylistId() {
+        return playlistId;
     }
 
-    public void setPlaylist(Playlist playlist) {
-        this.playlist = playlist;
+    public void setPlaylistId(Long playlistId) {
+        this.playlistId = playlistId;
     }
 
     public int getOrderIndex() {
