@@ -25,10 +25,32 @@ public class VideoController {
         return new ResponseEntity<>(savedVideo, HttpStatus.CREATED);
     }
 
+    // get all videos
     @GetMapping("/all")
     public ResponseEntity<List<Video>> getAllVideos() {
         List<Video> videos = videoService.getAllVideos();
         return ResponseEntity.ok(videos);
+    }
+
+    // get one specific video by id
+    @GetMapping("/one/{videoId}")
+    public ResponseEntity<Video> getVideoById(@PathVariable Long videoId) {
+        Video video = videoService.getVideoById(videoId);
+        return ResponseEntity.ok(video);
+    }
+
+    // edit video
+    @PutMapping("/edit/{videoId}")
+    public ResponseEntity<Video> updateVideo(@PathVariable Long videoId, @RequestBody Video video) {
+        Video updatedVideo = videoService.updateVideo(videoId, video);
+        return ResponseEntity.ok(updatedVideo);
+    }
+
+    // delete video
+    @DeleteMapping("/delete/{videoId}")
+    public ResponseEntity<Void> deleteVideo(@PathVariable Long videoId) {
+        videoService.deleteVideo(videoId);
+        return ResponseEntity.noContent().build();
     }
 
 }
