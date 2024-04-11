@@ -4,17 +4,16 @@ import com.Daniel.YtManagerBackend.controller.exception.NotFoundException;
 import com.Daniel.YtManagerBackend.model.Playlist;
 import com.Daniel.YtManagerBackend.model.VideoPlaylist;
 import com.Daniel.YtManagerBackend.repository.VideoPlaylistRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class VideoPlaylistService {
-    private final VideoPlaylistRepository videoPlaylistRepository;
 
-    public VideoPlaylistService(VideoPlaylistRepository videoPlaylistRepository) {
-        this.videoPlaylistRepository = videoPlaylistRepository;
-    }
+    @Autowired
+    private VideoPlaylistRepository videoPlaylistRepository;
 
     // save video to playlist
     public VideoPlaylist saveVideoPlaylist(VideoPlaylist videoPlaylist) {

@@ -1,18 +1,23 @@
 package com.Daniel.YtManagerBackend.service;
 import com.Daniel.YtManagerBackend.controller.exception.NotFoundException;
 import com.Daniel.YtManagerBackend.model.Video;
+import com.Daniel.YtManagerBackend.repository.VideoPlaylistRepository;
 import com.Daniel.YtManagerBackend.repository.VideoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class VideoService {
-    private final VideoRepository videoRepository;
 
-    public VideoService(VideoRepository videoRepository) {
-        this.videoRepository = videoRepository;
-    }
+    @Autowired
+    private VideoRepository videoRepository;
+
+    @Autowired
+    private VideoPlaylistRepository videoPlaylistRepository;
+
 
     // creating new video
     public Video saveVideo(Video video) {
@@ -47,7 +52,10 @@ public class VideoService {
     }
 
     // delete video
+    @Transactional
     public void deleteVideo(Long videoId) {
+        videoPlaylistRepository.deleteByVideoId(videoId);
+
         videoRepository.deleteById(videoId);
     }
 

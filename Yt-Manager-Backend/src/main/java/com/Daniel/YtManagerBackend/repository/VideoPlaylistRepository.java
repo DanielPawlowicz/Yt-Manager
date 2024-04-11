@@ -11,4 +11,10 @@ import java.util.List;
 public interface VideoPlaylistRepository extends JpaRepository<VideoPlaylist, Long> {
 
     List<VideoPlaylist> findByPlaylistIdOrderByOrderIndex(Long playlistId);
+
+    void deleteByVideoId(Long videoId);
+
+    void deleteByPlaylistId(Long playlistId);
+
+
 }

@@ -26,6 +26,8 @@ const SearchYoutube = () => {
         console.error("Error adding to database: " + er);
         alert("Filed to add video to database");
       }
+
+      
     };
   
     const handleSubmit = async (event) => {

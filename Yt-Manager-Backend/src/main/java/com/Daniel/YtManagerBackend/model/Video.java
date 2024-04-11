@@ -29,6 +29,7 @@ public class Video {
     })
     private Map<Integer, TimestampInfo> timestamps = new HashMap<>(); // Store timestamps as a map
     private boolean watched;
+//    private String ytId;
 
     public Long getId() {
         return id;
@@ -101,4 +102,12 @@ public class Video {
     public void setWatched(boolean watched) {
         this.watched = watched;
     }
+
+//    public String getYtId() {
+//        return ytId;
+//    }
+//
+//    public void setYtId(String ytId) {
+//        this.ytId = ytId;
+//    }
 }

@@ -3,17 +3,21 @@ package com.Daniel.YtManagerBackend.service;
 import com.Daniel.YtManagerBackend.controller.exception.NotFoundException;
 import com.Daniel.YtManagerBackend.model.Playlist;
 import com.Daniel.YtManagerBackend.repository.PlaylistRepository;
+import com.Daniel.YtManagerBackend.repository.VideoPlaylistRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class PlaylistService {
-    private final PlaylistRepository playlistRepository;
 
-    public PlaylistService(PlaylistRepository playlistRepository) {
-        this.playlistRepository = playlistRepository;
-    }
+    @Autowired
+    private PlaylistRepository playlistRepository;
+
+    @Autowired
+    private VideoPlaylistRepository videoPlaylistRepository;
 
     // creating new playlist
     public Playlist savePlaylist(Playlist playlist) {
@@ -41,7 +45,10 @@ public class PlaylistService {
     }
 
     // delete playlist
+    @Transactional
     public void deletePlaylist(Long playlistId) {
+        videoPlaylistRepository.deleteByPlaylistId(playlistId);
+
         playlistRepository.deleteById(playlistId);
     }
 
