@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Service from './service/Service';
 
 const API_KEY = 'AIzaSyCCd-2OgVAdtWYRIWQ6JapPXYB1-IjSESg';
 
@@ -9,6 +10,22 @@ const SearchYoutube = () => {
   
     const handleChange = (event) => {
       setQuery(event.target.value);
+    };
+
+
+    // saving video to database
+    const addToDatabase = async (video) => {
+      const title = video.snippet.title;
+      const link = `https://www.youtube.com/watch?v=${video.id.videoId}`;
+      const duration = video.duration;
+      const thumbnailUrl = video.snippet.thumbnails.default.url;
+      try{
+        await Service.addVideoToDb({title, link, duration, thumbnailUrl});
+        alert("Video added to database successfully");
+      } catch (er) {
+        console.error("Error adding to database: " + er);
+        alert("Filed to add video to database");
+      }
     };
   
     const handleSubmit = async (event) => {
@@ -42,6 +59,7 @@ const SearchYoutube = () => {
       }
     };
     
+
     const parseDuration = (duration) => {
       const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
     
@@ -81,7 +99,9 @@ const SearchYoutube = () => {
                 {item.snippet.title}
               </a>
               <p>Duration: {parseDuration(item.duration)}</p>
+              <button onClick={()=>addToDatabase(item)}>+</button>
             </li>
+            
           ))}
         </ul>
       </div>
