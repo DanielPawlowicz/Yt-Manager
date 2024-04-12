@@ -19,9 +19,10 @@ public class PlaylistService {
     @Autowired
     private VideoPlaylistRepository videoPlaylistRepository;
 
-    // creating new playlist
-    public Playlist savePlaylist(Playlist playlist) {
-        return playlistRepository.save(playlist);
+    // creating new playlist and return it's id
+    public Long createPlaylist(Playlist playlist) {
+        Playlist createdPlaylist = playlistRepository.save(playlist);
+        return createdPlaylist.getId(); // Return the ID of the newly created playlist
     }
 
     // get all playlists

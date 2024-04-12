@@ -19,11 +19,11 @@ public class PlaylistController {
         this.playlistService = playlistService;
     }
 
-    // create playlist
-    @PostMapping("/add")
-    public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playlist) {
-        Playlist savedPlaylist = playlistService.savePlaylist(playlist);
-        return new ResponseEntity<>(savedPlaylist, HttpStatus.CREATED);
+    // creating new playlist and return it's id
+    @PostMapping("/create")
+    public ResponseEntity<Long> createPlaylist(@RequestBody Playlist playlist) {
+        Long playlistId = playlistService.createPlaylist(playlist);
+        return new ResponseEntity<>(playlistId, HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
