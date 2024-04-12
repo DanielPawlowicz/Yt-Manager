@@ -47,17 +47,23 @@ public class VideoPlaylistController {
         return ResponseEntity.ok(videoPlaylist);
     }
 
-    //
+    // eddit
     @PutMapping("/edit/{videoPlaylistId}")
     public ResponseEntity<VideoPlaylist> updateVideoPlaylist(@PathVariable Long videoPlaylistId, @RequestBody VideoPlaylist videoPlaylist) {
         VideoPlaylist updatedVideoPlaylist = videoPlaylistService.updateVideoPlaylist(videoPlaylistId, videoPlaylist);
         return ResponseEntity.ok(updatedVideoPlaylist);
     }
 
+    // delete
     @DeleteMapping("/delete/{videoPlaylistId}")
     public ResponseEntity<Void> deleteVideoPlaylist(@PathVariable Long videoPlaylistId) {
         videoPlaylistService.deleteVideoPlaylist(videoPlaylistId);
         return ResponseEntity.noContent().build();
     }
 
+    // search for max orderIndex for specific playlist, and if no records then return 0
+    @GetMapping("/max-order-index/{playlistId}")
+    public int getMaxOrderIndexByPlaylistId(@PathVariable Long playlistId) {
+        return videoPlaylistService.getMaxOrderIndexByPlaylistId(playlistId);
+    }
 }
