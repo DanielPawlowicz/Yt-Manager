@@ -21,27 +21,18 @@ class Video {
                     alert("Video added to database successfully");
                 }
 
+                // get the max orderIndex from this playlist
                 let order = await Service.maxOrder(playlistId);
-                console.log(order.data);
-                let order1 = order.data + 1;
-
-                console.log(order1);
+                order = order.data + 1;
 
                 // add video to playlist
-                await Service.addVideoToPlaylist(ytId, playlistId, order1);
+                await Service.addVideoToPlaylist(ytId, playlistId, order);
 
             } catch (er) {
                 console.error("Error adding to database: " + er);
                 alert("Filed to add video to database");
             }
       };
-  
-      // save video to another playlist
-    //   addToPlaylist = async (video) => {
-    //     // await Service.getPlaylists();
-    //     // console.log("works"+video);
-
-    //   }
     
 
 }

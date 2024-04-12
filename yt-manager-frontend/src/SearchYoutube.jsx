@@ -11,6 +11,7 @@ const SearchYoutube = () => {
     const [showPlaylistDialog, setShowPlaylistDialog] = useState(false);
     const [playlists, setPlaylists] = useState([]);
     const [dialogPosition, setDialogPosition] = useState({ x: 0, y: 0 });
+    const [selectedVideo, setSelectedVideo] = useState({});
   
     useEffect(() => {
       const handleClickOutside = (event) => {
@@ -89,7 +90,7 @@ const SearchYoutube = () => {
       return durationString.trim();
     };
 
-    const handleShowPlaylists = async (e) => {
+    const handleShowPlaylists = async (e, item) => {
 
       const rect = e.target.getBoundingClientRect();
       setDialogPosition({ x: rect.x, y: rect.y });
@@ -97,6 +98,7 @@ const SearchYoutube = () => {
       try {
         const response = await Service.getPlaylists();
         setPlaylists(response.data);
+        setSelectedVideo(item);
         setShowPlaylistDialog(true);
         // console.log("worked");
       } catch (error) {
@@ -122,25 +124,25 @@ const SearchYoutube = () => {
                 </a>
                 <p className='video-duration'>{parseDuration(item.duration)}</p>
                 <button onClick={()=>Video.addToPlaylist(item, 1)}>+ To Watch</button>
-                {/* <button onClick={(e)=>handleShowPlaylists(e)}>+ Playlists</button> */}
+                <button onMouseOver={(e)=>handleShowPlaylists(e, item)}>+ Playlists</button>
                 </div>
             </li>
             
           ))}
         </ul>
 
-        {/* {showPlaylistDialog && (
+        {showPlaylistDialog && (
           <div className="playlist-dialog" style={{ top: dialogPosition.y, left: dialogPosition.x }}>
-            <h2>Select a Playlist</h2>
+            <h3>Select the Playlist</h3>
             <ul>
               {playlists.map((playlist) => (
-                <li key={playlist.id}>
-                  <button onClick={() => Video.addToPlaylist(playlist.id)}>Add to {playlist.playlistName}</button>
+                <li key={playlist.id} className='playlists-list'>
+                  <p onClick={() => Video.addToPlaylist(selectedVideo, playlist.id)}>{playlist.playlistName}</p>
                 </li>
               ))}
             </ul>
           </div>
-        )} */}
+        )}
         
       </div>
     );

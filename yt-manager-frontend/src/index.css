@@ -31,10 +31,29 @@ code {
 .playlist-dialog{
   display: block;
   width: 200px;
-  height: 200px;
+  min-height: 200px;
   position: fixed;
   /* top: 10px;
   left: 10px; */
   background-color: white;
   border: 1px solid black;
+  padding: 10px;
+}
+
+.playlist-dialog ul{
+  padding: 0;
+  margin: 0;
+}
+
+.playlists-list{
+  list-style-type: none;
+  border-top: 0.5px solid #ccc;
+  margin: 0;
+  padding: 1px 10px;
+}
+
+.playlists-list:hover{
+  cursor: pointer;
+  background-color: #dedede;
+  /* font-weight: bold; */
 }
