@@ -53,6 +53,11 @@ public class VideoController {
         return ResponseEntity.noContent().build();
     }
 
-
+    // check if there is record of ytId in db
+    @GetMapping("/exists/{ytId}")
+    public ResponseEntity<Boolean> checkIfVideoExistsByYtId(@PathVariable String ytId) {
+        boolean exists = videoService.doesVideoExistByYtId(ytId);
+        return ResponseEntity.ok(exists);
+    }
 
 }

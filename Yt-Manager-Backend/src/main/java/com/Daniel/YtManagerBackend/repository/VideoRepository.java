@@ -12,4 +12,7 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
     void deleteByYtId(String ytId);
 
     Optional<Video> findByYtId(String ytId);
+
+    // check if there is record of ytId in db
+    boolean existsByYtId(String ytId);
 }

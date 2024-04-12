@@ -64,4 +64,9 @@ public class VideoService {
         return videoRepository.findByYtId(ytId);
     }
 
+    // check if there is record of ytId in db
+    public boolean doesVideoExistByYtId(String ytId) {
+        return videoRepository.existsByYtId(ytId);
+    }
+
 }
