@@ -121,15 +121,15 @@ const SearchYoutube = () => {
                   <p className='video-title'>{item.snippet.title}</p>
                 </a>
                 <p className='video-duration'>{parseDuration(item.duration)}</p>
-                <button onClick={()=>Video.addToDatabase(item)}>+ To Watch</button>
-                <button onClick={(e)=>handleShowPlaylists(e)}>+ Playlists</button>
+                <button onClick={()=>Video.addToPlaylist(item, 1)}>+ To Watch</button>
+                {/* <button onClick={(e)=>handleShowPlaylists(e)}>+ Playlists</button> */}
                 </div>
             </li>
             
           ))}
         </ul>
 
-        {showPlaylistDialog && (
+        {/* {showPlaylistDialog && (
           <div className="playlist-dialog" style={{ top: dialogPosition.y, left: dialogPosition.x }}>
             <h2>Select a Playlist</h2>
             <ul>
@@ -140,7 +140,7 @@ const SearchYoutube = () => {
               ))}
             </ul>
           </div>
-        )}
+        )} */}
         
       </div>
     );
