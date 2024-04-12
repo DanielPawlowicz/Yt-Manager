@@ -12,11 +12,14 @@ code {
     monospace;
 }
 
+ul li {
+  list-style-type: none;
+}
+
 .video-render{
   border-bottom: 1px solid #ccc;
   /* margin-bottom: 10px; */
   padding: 10px;
-  list-style-type: none;
 }
 
 .video-info{
@@ -32,12 +35,14 @@ code {
   display: block;
   width: 200px;
   min-height: 200px;
+  max-height: 400px;
   position: fixed;
   /* top: 10px;
   left: 10px; */
   background-color: white;
   border: 1px solid black;
   padding: 10px;
+  overflow-y: auto;
 }
 
 .playlist-dialog ul{
@@ -46,7 +51,6 @@ code {
 }
 
 .playlists-list{
-  list-style-type: none;
   border-top: 0.5px solid #ccc;
   margin: 0;
   padding: 1px 10px;
@@ -56,4 +60,15 @@ code {
   cursor: pointer;
   background-color: #dedede;
   /* font-weight: bold; */
+}
+
+.new-playlist{
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 10px;
+
+}
+
+.new-playlist button{
+  cursor: pointer;
 }

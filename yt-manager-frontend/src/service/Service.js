@@ -27,6 +27,10 @@ class Service {
     maxOrder(playlistId){
         return axios.get(API_URL+"/video-playlists/max-order-index/"+playlistId);
     }
+
+    createNewPlaylist(playlistName){
+        return axios.post(API_URL+"/playlists/create",{playlistName});
+    }
 }
 
 export default new Service;

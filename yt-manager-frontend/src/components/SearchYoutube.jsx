@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Service from './service/Service';
-import Video from './service/Video';
+import Service from '../service/Service';
+import Video from '../service/Video';
 
 const API_KEY = 'AIzaSyCCd-2OgVAdtWYRIWQ6JapPXYB1-IjSESg';
 
@@ -12,6 +12,7 @@ const SearchYoutube = () => {
     const [playlists, setPlaylists] = useState([]);
     const [dialogPosition, setDialogPosition] = useState({ x: 0, y: 0 });
     const [selectedVideo, setSelectedVideo] = useState({});
+    const [playlistName, setPlaylistName] = useState('');
   
     useEffect(() => {
       const handleClickOutside = (event) => {
@@ -88,7 +89,7 @@ const SearchYoutube = () => {
       }
     
       return durationString.trim();
-    };
+    };   
 
     const handleShowPlaylists = async (e, item) => {
 
@@ -103,6 +104,24 @@ const SearchYoutube = () => {
         // console.log("worked");
       } catch (error) {
         console.error('Error fetching playlists:', error);
+      }
+    };
+
+    const handlePlaylistNameChange = (event) => {
+      setPlaylistName(event.target.value);
+    };
+
+    const handleCreatePlaylist = async (video, playlistName) => {
+      try {
+        let playlistResponse = await Service.createNewPlaylist(playlistName);
+        const playlistId = playlistResponse.data;
+        console.log(playlistId);
+        setShowPlaylistDialog(false);
+        setPlaylistName('');
+        await Video.addToPlaylist(video, 1);
+        await Video.addToPlaylist(video, playlistId);
+      } catch (error) {
+        console.error('Error creating playlist:', error);
       }
     };
   
@@ -135,6 +154,10 @@ const SearchYoutube = () => {
           <div className="playlist-dialog" style={{ top: dialogPosition.y, left: dialogPosition.x }}>
             <h3>Select the Playlist</h3>
             <ul>
+              <li className='new-playlist'>
+                <label>New Playlist: <input type="text" className='playlistName' name='playlistName'  value={playlistName} onChange={handlePlaylistNameChange}/></label>
+                <button onClick={() => handleCreatePlaylist(selectedVideo, playlistName)}>Add</button>
+              </li>
               {playlists.map((playlist) => (
                 <li key={playlist.id} className='playlists-list'>
                   <p onClick={() => Video.addToPlaylist(selectedVideo, playlist.id)}>{playlist.playlistName}</p>
