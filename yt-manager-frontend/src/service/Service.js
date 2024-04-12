@@ -15,6 +15,9 @@ class Service {
         return axios.post(API_URL+"/video-playlists/assign", {ytId, playlistId, orderIndex: 1});
     }
 
+    getPlaylists(){
+        return axios.get(API_URL+"/playlists/all");
+    }
 }
 
 export default new Service;

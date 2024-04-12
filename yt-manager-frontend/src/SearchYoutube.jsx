@@ -1,41 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Service from './service/Service';
+import Video from './service/Video';
 
 const API_KEY = 'AIzaSyCCd-2OgVAdtWYRIWQ6JapPXYB1-IjSESg';
 
 const SearchYoutube = () => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
+    const [showPlaylistDialog, setShowPlaylistDialog] = useState(false);
+    const [playlists, setPlaylists] = useState([]);
+    const [dialogPosition, setDialogPosition] = useState({ x: 0, y: 0 });
   
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        const playlistDialog = document.querySelector('.playlist-dialog');
+        if (playlistDialog && !playlistDialog.contains(event.target)) {
+          setShowPlaylistDialog(false);
+        }
+      };
+
+      document.addEventListener('mousedown', handleClickOutside);
+
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [showPlaylistDialog]);
+
+
     const handleChange = (event) => {
       setQuery(event.target.value);
     };
 
-
-    // saving video to database
-    const addToDatabase = async (video) => {
-      const ytId = video.id.videoId;
-      const title = video.snippet.title;
-      const link = `https://www.youtube.com/watch?v=${video.id.videoId}`;
-      const duration = video.duration;
-      const thumbnailUrl = video.snippet.thumbnails.default.url;
-      try{
-        // add video to database
-        await Service.addVideoToDb({ytId, title, link, duration, thumbnailUrl});
-        // add video to playlist To watch - id: 1
-        await Service.addVideoToPlaylist(ytId, 1);
-        alert("Video added to database successfully");
-      } catch (er) {
-        console.error("Error adding to database: " + er);
-        alert("Filed to add video to database");
-      }
-    };
-
-    const addToPlaylist = async (video) => {
-
-    }
-  
     const handleSubmit = async (event) => {
       event.preventDefault();
       try {
@@ -92,6 +88,21 @@ const SearchYoutube = () => {
     
       return durationString.trim();
     };
+
+    const handleShowPlaylists = async (e) => {
+
+      const rect = e.target.getBoundingClientRect();
+      setDialogPosition({ x: rect.x, y: rect.y });
+
+      try {
+        const response = await Service.getPlaylists();
+        setPlaylists(response.data);
+        setShowPlaylistDialog(true);
+        // console.log("worked");
+      } catch (error) {
+        console.error('Error fetching playlists:', error);
+      }
+    };
   
     return (
       <div>
@@ -101,7 +112,7 @@ const SearchYoutube = () => {
         </form>
         <ul>
           {results.map((item) => (
-            <li key={item.id.videoId}>
+            <li className="video-render" key={item.id.videoId}>
                 <a href={`https://www.youtube.com/watch?v=${item.id.videoId}`} target="_blank" rel="noopener noreferrer">
                   <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} />
                 </a>
@@ -110,13 +121,27 @@ const SearchYoutube = () => {
                   <p className='video-title'>{item.snippet.title}</p>
                 </a>
                 <p className='video-duration'>{parseDuration(item.duration)}</p>
-                <button onClick={()=>addToDatabase(item)}>+ To Watch</button>
-                <button onClick={()=>addToPlaylist(item)}>+ Playlists</button>
+                <button onClick={()=>Video.addToDatabase(item)}>+ To Watch</button>
+                <button onClick={(e)=>handleShowPlaylists(e)}>+ Playlists</button>
                 </div>
             </li>
             
           ))}
         </ul>
+
+        {showPlaylistDialog && (
+          <div className="playlist-dialog" style={{ top: dialogPosition.y, left: dialogPosition.x }}>
+            <h2>Select a Playlist</h2>
+            <ul>
+              {playlists.map((playlist) => (
+                <li key={playlist.id}>
+                  <button onClick={() => Video.addToPlaylist(playlist.id)}>Add to {playlist.playlistName}</button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        
       </div>
     );
 }
