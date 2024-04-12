@@ -15,20 +15,24 @@ const SearchYoutube = () => {
 
     // saving video to database
     const addToDatabase = async (video) => {
+      const ytId = video.id.videoId;
       const title = video.snippet.title;
       const link = `https://www.youtube.com/watch?v=${video.id.videoId}`;
       const duration = video.duration;
       const thumbnailUrl = video.snippet.thumbnails.default.url;
       try{
-        await Service.addVideoToDb({title, link, duration, thumbnailUrl});
+        await Service.addVideoToDb({ytId, title, link, duration, thumbnailUrl});
+        // await Service.addVideoToPlaylist({})
         alert("Video added to database successfully");
       } catch (er) {
         console.error("Error adding to database: " + er);
         alert("Filed to add video to database");
       }
-
-      
     };
+
+    const addToPlaylist = async (video) => {
+
+    }
   
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -96,12 +100,17 @@ const SearchYoutube = () => {
         <ul>
           {results.map((item) => (
             <li key={item.id.videoId}>
-              <a href={`https://www.youtube.com/watch?v=${item.id.videoId}`} target="_blank" rel="noopener noreferrer">
-                <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} />
-                {item.snippet.title}
-              </a>
-              <p>Duration: {parseDuration(item.duration)}</p>
-              <button onClick={()=>addToDatabase(item)}>+</button>
+                <a href={`https://www.youtube.com/watch?v=${item.id.videoId}`} target="_blank" rel="noopener noreferrer">
+                  <img src={item.snippet.thumbnails.default.url} alt={item.snippet.title} />
+                </a>
+                <div className="video-info">
+                <a href={`https://www.youtube.com/watch?v=${item.id.videoId}`} target="_blank" rel="noopener noreferrer">
+                  <p className='video-title'>{item.snippet.title}</p>
+                </a>
+                <p className='video-duration'>{parseDuration(item.duration)}</p>
+                <button onClick={()=>addToDatabase(item)}>+ To Watch</button>
+                <button onClick={()=>addToPlaylist(item)}>+ Playlists</button>
+                </div>
             </li>
             
           ))}

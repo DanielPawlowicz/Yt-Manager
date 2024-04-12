@@ -12,7 +12,7 @@ public interface VideoPlaylistRepository extends JpaRepository<VideoPlaylist, Lo
 
     List<VideoPlaylist> findByPlaylistIdOrderByOrderIndex(Long playlistId);
 
-    void deleteByVideoId(Long videoId);
+    void deleteByYtId(String ytId);
 
     void deleteByPlaylistId(Long playlistId);
 

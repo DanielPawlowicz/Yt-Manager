@@ -41,7 +41,7 @@ public class VideoPlaylistService {
         VideoPlaylist existingVideoPlaylist = videoPlaylistRepository.findById(videoPlaylistId)
                 .orElseThrow(() -> new NotFoundException("VideoPlaylist not found with ID: " + videoPlaylistId));
 
-        existingVideoPlaylist.setVideoId(videoPlaylist.getVideoId());
+        existingVideoPlaylist.setYtId(videoPlaylist.getYtId());
         existingVideoPlaylist.setPlaylistId(videoPlaylist.getPlaylistId());
         existingVideoPlaylist.setOrderIndex(videoPlaylist.getOrderIndex());
 
@@ -52,4 +52,5 @@ public class VideoPlaylistService {
     public void deleteVideoPlaylist(Long videoPlaylistId) {
         videoPlaylistRepository.deleteById(videoPlaylistId);
     }
+
 }

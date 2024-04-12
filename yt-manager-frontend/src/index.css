@@ -13,6 +13,17 @@ code {
 }
 
 li{
-  border-bottom: 1px solid silver;
-  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  /* margin-bottom: 10px; */
+  padding: 10px;
+  list-style-type: none;
+}
+
+.video-info{
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.video-info button{
+  margin-right: 10px;
 }

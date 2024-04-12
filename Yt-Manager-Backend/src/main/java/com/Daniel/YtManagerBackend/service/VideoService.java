@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VideoService {
@@ -51,12 +52,16 @@ public class VideoService {
         return videoRepository.save(existingVideo);
     }
 
-    // delete video
+    // delete video by Yt Id
     @Transactional
-    public void deleteVideo(Long videoId) {
-        videoPlaylistRepository.deleteByVideoId(videoId);
+    public void deleteVideoByYtId(String ytId) {
+        videoPlaylistRepository.deleteByYtId(ytId);
 
-        videoRepository.deleteById(videoId);
+        videoRepository.deleteByYtId(ytId);
+    }
+
+    public Optional<Video> findByYtId(String ytId) {
+        return videoRepository.findByYtId(ytId);
     }
 
 }

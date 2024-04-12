@@ -5,17 +5,22 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "video_playlist")
 public class VideoPlaylist {
+
+// Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "video_id")
-    private Long videoId;
+    @JoinColumn(name = "video_yt_id")
+    private String ytId;
 
     @JoinColumn(name = "playlist_id")
     private Long playlistId;
 
     private int orderIndex;
+
+
+// Getters and Setters
 
     public Long getId() {
         return id;
@@ -25,12 +30,12 @@ public class VideoPlaylist {
         this.id = id;
     }
 
-    public Long getVideoId() {
-        return videoId;
+    public String getYtId() {
+        return ytId;
     }
 
-    public void setVideoId(Long videoId) {
-        this.videoId = videoId;
+    public void setYtId(String ytId) {
+        this.ytId = ytId;
     }
 
     public Long getPlaylistId() {

@@ -12,6 +12,7 @@ public class Video {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String ytId;
     private String title;
     private String link;
     private String duration;
@@ -29,7 +30,6 @@ public class Video {
     })
     private Map<Integer, TimestampInfo> timestamps = new HashMap<>(); // Store timestamps as a map
     private boolean watched;
-//    private String ytId;
 
     public Long getId() {
         return id;
@@ -37,6 +37,14 @@ public class Video {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getYtId() {
+        return ytId;
+    }
+
+    public void setYtId(String ytId) {
+        this.ytId = ytId;
     }
 
     public String getTitle() {
@@ -103,11 +111,4 @@ public class Video {
         this.watched = watched;
     }
 
-//    public String getYtId() {
-//        return ytId;
-//    }
-//
-//    public void setYtId(String ytId) {
-//        this.ytId = ytId;
-//    }
 }
