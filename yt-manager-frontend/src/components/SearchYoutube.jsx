@@ -38,7 +38,7 @@ const SearchYoutube = () => {
       event.preventDefault();
       try {
         const response = await axios.get(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${query}&key=${API_KEY}`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=200&q=${query}&key=${API_KEY}`
         );
         const videoIds = response.data.items.map((item) => item.id.videoId);
         const videoDetailsResponse = await axios.get(

@@ -47,9 +47,9 @@ public class VideoController {
     }
 
     // delete video by Yt Id
-    @DeleteMapping("/delete/{ytId}")
-    public ResponseEntity<Void> deleteVideo(@PathVariable String ytId) {
-        videoService.deleteVideoByYtId(ytId);
+    @DeleteMapping("/delete/{ytId}/{playlistId}")
+    public ResponseEntity<Void> deleteVideo(@PathVariable String ytId, @PathVariable Long playlistId) {
+        videoService.deleteVideoByYtId(ytId, playlistId);
         return ResponseEntity.noContent().build();
     }
 

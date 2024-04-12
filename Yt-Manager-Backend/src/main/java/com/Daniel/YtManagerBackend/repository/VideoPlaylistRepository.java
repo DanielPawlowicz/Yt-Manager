@@ -21,4 +21,14 @@ public interface VideoPlaylistRepository extends JpaRepository<VideoPlaylist, Lo
     @Query("SELECT COALESCE(MAX(vp.orderIndex), 0) FROM VideoPlaylist vp WHERE vp.playlistId = :playlistId")
     int findMaxOrderIndexByPlaylistId(Long playlistId);
 
+    @Query("SELECT vp.orderIndex FROM VideoPlaylist vp WHERE vp.ytId = :ytId AND vp.playlistId = :playlistId")
+    Integer findOrderIndexByYtIdAndPlaylistId(String ytId, Long playlistId);
+
+    Long findPlaylistIdByYtId(String ytId);
+
+    List<VideoPlaylist> findByPlaylistIdAndOrderIndexGreaterThanOrderByOrderIndexAsc(Long playlistId, int orderIndex);
+
+    void deleteByYtIdAndPlaylistId(String ytId, Long playlistId);
+
+
 }

@@ -1,6 +1,7 @@
 package com.Daniel.YtManagerBackend.service;
 import com.Daniel.YtManagerBackend.controller.exception.NotFoundException;
 import com.Daniel.YtManagerBackend.model.Video;
+import com.Daniel.YtManagerBackend.model.VideoPlaylist;
 import com.Daniel.YtManagerBackend.repository.VideoPlaylistRepository;
 import com.Daniel.YtManagerBackend.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,11 +54,34 @@ public class VideoService {
     }
 
     // delete video by Yt Id
-    @Transactional
-    public void deleteVideoByYtId(String ytId) {
-        videoPlaylistRepository.deleteByYtId(ytId);
+//    @Transactional
+//    public void deleteVideoByYtId(String ytId) {
+//        videoPlaylistRepository.deleteByYtId(ytId);
+//
+//        videoRepository.deleteByYtId(ytId);
+//    }
 
+    @Transactional
+    public void deleteVideoByYtId(String ytId, Long playlistId) {
+        // Get the order index of the video being deleted
+        int deletedOrderIndex = videoPlaylistRepository.findOrderIndexByYtIdAndPlaylistId(ytId, playlistId);
+
+        // Delete the video from the video table
         videoRepository.deleteByYtId(ytId);
+
+        // Delete the association record
+        videoPlaylistRepository.deleteByYtIdAndPlaylistId(ytId, playlistId);
+
+        // Get all videos assigned to the same playlist with order index higher than deletedOrderIndex
+        List<VideoPlaylist> videosToUpdate = videoPlaylistRepository.findByPlaylistIdAndOrderIndexGreaterThanOrderByOrderIndexAsc(playlistId, deletedOrderIndex);
+
+        // Decrement the order index of each video
+        for (VideoPlaylist video : videosToUpdate) {
+            video.setOrderIndex(video.getOrderIndex() - 1);
+        }
+
+        // Update the videos in the database
+        videoPlaylistRepository.saveAll(videosToUpdate);
     }
 
     public Optional<Video> findByYtId(String ytId) {
