@@ -21,8 +21,10 @@ const SearchYoutube = () => {
       const duration = video.duration;
       const thumbnailUrl = video.snippet.thumbnails.default.url;
       try{
+        // add video to database
         await Service.addVideoToDb({ytId, title, link, duration, thumbnailUrl});
-        // await Service.addVideoToPlaylist({})
+        // add video to playlist To watch - id: 1
+        await Service.addVideoToPlaylist(ytId, 1);
         alert("Video added to database successfully");
       } catch (er) {
         console.error("Error adding to database: " + er);
