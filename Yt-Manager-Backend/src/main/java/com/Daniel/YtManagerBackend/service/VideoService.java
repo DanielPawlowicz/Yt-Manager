@@ -86,4 +86,20 @@ public class VideoService {
         return videoRepository.existsByYtId(ytId);
     }
 
+    // edit video by ytId
+    public Video updateVideoByYtId(String ytId, Video video) {
+        Video existingVideo = videoRepository.findByYtId(ytId)
+                .orElseThrow(() -> new NotFoundException("Video not found with YT ID: " + ytId));
+
+        existingVideo.setTitle(video.getTitle());
+        existingVideo.setLink(video.getLink());
+        existingVideo.setDuration(video.getDuration());
+        existingVideo.setThumbnailUrl(video.getThumbnailUrl());
+        existingVideo.setBookmark(video.getBookmark());
+        existingVideo.setNote(video.getNote());
+        existingVideo.setTimestamps(video.getTimestamps());
+        existingVideo.setWatched(video.getWatched());
+
+        return videoRepository.save(existingVideo);
+    }
 }

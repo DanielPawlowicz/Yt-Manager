@@ -40,6 +40,14 @@ class Service {
         return axios.get(API_URL+"/videos/ytId/"+ytId);
     }
 
+    // setVideoWatched(id, updatedVideo){
+    //     return axios.put(`/videos/edit/${id}`, updatedVideo); 
+    // }
+
+    editByYtId(ytId, updatedVideo){
+        return axios.put(API_URL+"/videos/edit/ytId/"+ytId, updatedVideo);
+    }
+
 }
 
 export default new Service;

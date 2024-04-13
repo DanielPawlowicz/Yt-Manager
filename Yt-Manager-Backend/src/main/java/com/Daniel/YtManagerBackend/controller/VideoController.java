@@ -72,4 +72,11 @@ public class VideoController {
         }
     }
 
+    // Edit video by ytId
+    @PutMapping("/edit/ytId/{ytId}")
+    public ResponseEntity<Video> updateVideoByYtId(@PathVariable String ytId, @RequestBody Video video) {
+        Video updatedVideo = videoService.updateVideoByYtId(ytId, video);
+        return ResponseEntity.ok(updatedVideo);
+    }
+
 }

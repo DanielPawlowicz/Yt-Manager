@@ -43,6 +43,11 @@ class Video {
       };
 
     parseDuration = (duration) => {
+
+        if (!duration) {
+            return 'Duration not available';
+        }
+        
         const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
       
         if (!match) {
