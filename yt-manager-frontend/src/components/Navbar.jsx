@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Service from '../service/Service';
 
-const Navbar = () => {
+const Navbar = ({ setSelectedPlaylist }) => {
 
     const [playlists, setPlaylists] = useState([]);
 
@@ -18,6 +18,10 @@ const Navbar = () => {
         }
     }
 
+    const handlePlaylistClick = (playlist) => {
+        setSelectedPlaylist(playlist); // Update the selected playlist
+    };
+
   return (
     <div className='Navbar'>
     
@@ -26,9 +30,9 @@ const Navbar = () => {
         <h2 className='playlists-title'>Playlists</h2>
 
         {playlists.map((playlist) => (
-            <h4 className='playlist-item-nav' key={playlist.id}>{playlist.playlistName}</h4>
+            <h4 className='playlist-item-nav' key={playlist.id} onClick={() => handlePlaylistClick(playlist)}>{playlist.playlistName}</h4>
         ))}
-        
+
     
     </div>
   )
