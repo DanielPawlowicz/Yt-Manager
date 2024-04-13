@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Service from '../service/Service';
+import SearchIcon from '@mui/icons-material/Search';
+import { Icon } from '@mui/material';
 
 const Navbar = ({ setSelectedPlaylist, setShowSearch }) => {
 
@@ -32,6 +34,7 @@ const Navbar = ({ setSelectedPlaylist, setShowSearch }) => {
     <div className='Navbar'>
     
         <h1 className='title' onClick={handleTitleClick}>YT Manager</h1>
+        <h2 className="search-link" onClick={handleTitleClick}>Search <SearchIcon className='search-icon'/></h2>
 
         <h2 className='playlists-title'>Playlists</h2>
 
