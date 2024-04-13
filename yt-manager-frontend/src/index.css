@@ -108,12 +108,14 @@ ul li {
 .video-render{
   border-bottom: 1px solid #ccc;
   /* margin-bottom: 10px; */
-  padding: 10px;
+  padding: 5px;
 }
 
 .video-info{
   display: inline-block;
-  margin-left: 20px;
+  margin: 0 0 0 20px;
+  /* margin-left: 20px; */
+  vertical-align: super;
 }
 
 .video-info button{

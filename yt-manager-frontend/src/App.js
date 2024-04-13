@@ -41,7 +41,7 @@ function App() {
                 {showSearch ? (
                     <SearchYoutube onPlaylistCreated={loadPlaylists}/>
                 ) : (
-                    <Playlist playlist={selectedPlaylist} />
+                    <Playlist playlist={selectedPlaylist}/>
                 )}
             </div>
             <div style={{ clear: 'both' }}></div>

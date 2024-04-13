@@ -63,33 +63,7 @@ const SearchYoutube = ({ onPlaylistCreated }) => {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-    };
-    
-
-    const parseDuration = (duration) => {
-      const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-    
-      if (!match) {
-        return 'N/A';
-      }
-    
-      const hours = match[1] ? parseInt(match[1]) : 0;
-      const minutes = match[2] ? parseInt(match[2]) : 0;
-      const seconds = match[3] ? parseInt(match[3]) : 0;
-    
-      let durationString = '';
-      if (hours > 0) {
-        durationString += `${hours}h `;
-      }
-      if (minutes > 0) {
-        durationString += `${minutes}m `;
-      }
-      if (seconds > 0) {
-        durationString += `${seconds}s `;
-      }
-    
-      return durationString.trim();
-    };   
+    };    
 
     const handleShowPlaylists = async (e, item) => {
 
@@ -146,7 +120,7 @@ const SearchYoutube = ({ onPlaylistCreated }) => {
                 <a href={`https://www.youtube.com/watch?v=${item.id.videoId}`} target="_blank" rel="noopener noreferrer">
                   <p className='video-title'>{item.snippet.title}</p>
                 </a>
-                <p className='video-duration'>{parseDuration(item.duration)}</p>
+                <p className='video-duration'>{Video.parseDuration(item.duration)}</p>
                 <button onClick={()=>Video.addToPlaylist(item, 1)}>+ To Watch</button>
                 <button onMouseOver={(e)=>handleShowPlaylists(e, item)}>+ Playlists</button>
                 </div>

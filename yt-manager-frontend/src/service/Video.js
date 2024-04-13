@@ -41,6 +41,31 @@ class Video {
                 setTimeout(() => { notification.classList.remove('show'); }, 1500);
             }
       };
+
+    parseDuration = (duration) => {
+        const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+      
+        if (!match) {
+          return 'N/A';
+        }
+      
+        const hours = match[1] ? parseInt(match[1]) : 0;
+        const minutes = match[2] ? parseInt(match[2]) : 0;
+        const seconds = match[3] ? parseInt(match[3]) : 0;
+      
+        let durationString = '';
+        if (hours > 0) {
+          durationString += `${hours}h `;
+        }
+        if (minutes > 0) {
+          durationString += `${minutes}m `;
+        }
+        if (seconds > 0) {
+          durationString += `${seconds}s `;
+        }
+      
+        return durationString.trim();
+      };   
     
     //   createPlaylist  = async (video, playlistName) => {
     //     try{
