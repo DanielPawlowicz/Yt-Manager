@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -58,6 +59,17 @@ public class VideoController {
     public ResponseEntity<Boolean> checkIfVideoExistsByYtId(@PathVariable String ytId) {
         boolean exists = videoService.doesVideoExistByYtId(ytId);
         return ResponseEntity.ok(exists);
+    }
+
+    // get video by Yt Id
+    @GetMapping("/ytId/{ytId}")
+    public ResponseEntity<Video> getVideoByYtId(@PathVariable String ytId) {
+        Optional<Video> video = videoService.findByYtId(ytId);
+        if (video.isPresent()) {
+            return ResponseEntity.ok(video.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

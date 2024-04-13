@@ -53,14 +53,6 @@ public class VideoService {
         return videoRepository.save(existingVideo);
     }
 
-    // delete video by Yt Id
-//    @Transactional
-//    public void deleteVideoByYtId(String ytId) {
-//        videoPlaylistRepository.deleteByYtId(ytId);
-//
-//        videoRepository.deleteByYtId(ytId);
-//    }
-
     @Transactional
     public void deleteVideoByYtId(String ytId, Long playlistId) {
         // Get the order index of the video being deleted
@@ -84,6 +76,7 @@ public class VideoService {
         videoPlaylistRepository.saveAll(videosToUpdate);
     }
 
+    // find video by yt Id
     public Optional<Video> findByYtId(String ytId) {
         return videoRepository.findByYtId(ytId);
     }
