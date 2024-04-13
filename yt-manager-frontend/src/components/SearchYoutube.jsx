@@ -128,8 +128,8 @@ const SearchYoutube = () => {
     return (
       <div>
         <form onSubmit={handleSubmit}>
-          <input type="text" value={query} onChange={handleChange} />
-          <button type="submit">Search</button>
+          <input className="search-input" type="text" value={query} onChange={handleChange} />
+          <button className='search-btn' type="submit">Search</button>
         </form>
         <ul>
           {results.map((item) => (

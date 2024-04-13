@@ -12,6 +12,76 @@ code {
     monospace;
 }
 
+/* display - panels */
+
+.nav-panel{
+  width: 200px;
+  height: 100vh;
+  background-color: #ededed;
+  float: left;
+  padding: 20px 10px;
+}
+
+.title{
+  background-color: #bb0000;
+  color: white;
+  padding: 7px;
+  display: block;
+  margin-top: 0;
+  border-radius: 15px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.playlist-item-nav {
+  margin: 0;
+  padding: 7px;
+  display: block;
+  margin-left: 20px;
+}
+
+.playlist-item-nav:hover{
+  background-color: rgba(255, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+
+
+.main-panel{
+  display: inline-block;
+  padding: 20px;
+}
+
+
+/* search */
+
+.search-input{
+  position: relative;
+  width: 30vw;
+  height: 25px;
+  font-size: 20px;
+  padding: 0 10px;
+  border-radius: 15px;
+  z-index: 10;
+  border: 2px solid #555;
+}
+
+.search-btn{
+  height: 29px;
+  font-size: 20px;
+  border-radius: 15px;
+  margin-left: -20px;
+  padding-left: 30px;
+  padding-right: 10px;
+  z-index: 1;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #ddd;
+  border: 2px solid #555;
+  color: #323232;
+}
+
+
 ul li {
   list-style-type: none;
 }
