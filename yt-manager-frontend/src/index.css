@@ -167,6 +167,15 @@ ul li {
 
 /* Playlist component */
 
+.buttons-playlist,
+.clickable-playlist{
+  display: inline-block;
+}
+
+.clickable-td{
+  width: 50vw;
+}
+
 /* Notification */
 
 .notification {
@@ -197,6 +206,7 @@ ul li {
 display: block;
 opacity: 1;
 }
+
 
 
 /* play video */

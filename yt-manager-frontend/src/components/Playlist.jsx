@@ -73,16 +73,34 @@ const Playlist = ({ playlist }) => {
 
             <ul>
                 {videos.map((video) => (
-                    <>
-                        <li key={video.id} className='video-render' onClick={() => handleVideoClick(video)}>
-                            <img src={video.thumbnailUrl} alt={video.title} />
-                            <div className="video-info">
-                                <p className='video-title'>{video.title}</p>
-                                <p>{Video.parseDuration(video.duration)}</p>
-                            </div>
+                        <li key={video.id} className='video-render'>
+                            <table>
+                                <tr>
+                                    <td className='clickable-td'>
+                                        <div className="clickable-playlist"  onClick={() => handleVideoClick(video)}>
+                                            <img src={video.thumbnailUrl} alt={video.title} />
+                                            <div className="video-info">
+                                                <p className='video-title'>{video.title}</p>
+                                                <p>{Video.parseDuration(video.duration)}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td className='buttons-td'>
+                                        <div className="buttons-playlist">
+                                            <button onClick={() => markVideoAsWatched(video.ytId)}>Mark as Watched</button>
+                                            {/* add buttons and other:
+                                                + unmark as watched
+                                                + delete
+                                                + change order (functionality) 
+                                                + add to other playlists
+                                            */}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            
                         </li>
-                        <button onClick={() => markVideoAsWatched(video.ytId)}>Mark as Watched</button>
-                    </>
+
                 ))}
             </ul>
         </div>
