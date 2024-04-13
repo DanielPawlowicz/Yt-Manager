@@ -32,6 +32,8 @@ function App() {
 
     return (
         <>
+          <div id="notification" className="notification"></div>
+
             <div className='nav-panel'>
                 <Navbar handlePlaylistClick={handlePlaylistSelection} handleTitleClick={handleTitleClick} loadPlaylists={loadPlaylists} playlists={playlists}/>
             </div>

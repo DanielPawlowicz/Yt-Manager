@@ -27,8 +27,18 @@ class Video {
                 // add video to playlist
                 await Service.addVideoToPlaylist(ytId, playlistId, order);
 
+                showNotification("Video added successfully");
+
             } catch (er) {
                 console.error("Error adding to database: " + er);
+            }
+
+            function showNotification(message) {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.classList.add('show');
+            
+                setTimeout(() => { notification.classList.remove('show'); }, 1500);
             }
       };
     
