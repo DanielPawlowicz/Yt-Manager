@@ -5,7 +5,7 @@ import Video from '../service/Video';
 
 const API_KEY = 'AIzaSyCCd-2OgVAdtWYRIWQ6JapPXYB1-IjSESg';
 
-const SearchYoutube = () => {
+const SearchYoutube = ({ onPlaylistCreated }) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const [showPlaylistDialog, setShowPlaylistDialog] = useState(false);
@@ -120,6 +120,11 @@ const SearchYoutube = () => {
         setPlaylistName('');
         await Video.addToPlaylist(video, 1);
         await Video.addToPlaylist(video, playlistId);
+
+        // Invoke the callback function after playlist creation
+        if (onPlaylistCreated) {
+          onPlaylistCreated();
+        }
       } catch (error) {
         console.error('Error creating playlist:', error);
       }

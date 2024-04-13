@@ -31,6 +31,15 @@ class Service {
     createNewPlaylist(playlistName){
         return axios.post(API_URL+"/playlists/create",{playlistName});
     }
+
+    getPlaylistVideos(playlistId){
+        return axios.get(API_URL+"/video-playlists/allVideoFrom/"+playlistId);
+    }
+
+    getVideoByYtId(ytId){
+        return axios.get(API_URL+"/videos/ytId/"+ytId);
+    }
+
 }
 
 export default new Service;

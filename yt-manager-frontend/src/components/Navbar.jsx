@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react'
 import Service from '../service/Service';
 import SearchIcon from '@mui/icons-material/Search';
 
-const Navbar = ({ handlePlaylistClick, handleTitleClick }) => {
+const Navbar = ({ handlePlaylistClick, handleTitleClick, loadPlaylists ,playlists}) => {
 
-    const [playlists, setPlaylists] = useState([]);
+    // const [playlists, setPlaylists] = useState([]);
 
     useEffect(()=>{
         loadPlaylists();
     }, []);
 
-    const loadPlaylists = async () => {
-        try{
-            const response = await Service.getPlaylists();
-            setPlaylists(response.data);
-        } catch(err){
-            console.error("Error fetching playlist for navbar: ", err);
-        }
-    }
+    // const loadPlaylists = async () => {
+    //     try{
+    //         const response = await Service.getPlaylists();
+    //         setPlaylists(response.data);
+    //     } catch(err){
+    //         console.error("Error fetching playlist for navbar: ", err);
+    //     }
+    // }
 
     // const handleTitleClick = () => {
     //     setShowSearch(true); // Update state to show SearchYoutube component

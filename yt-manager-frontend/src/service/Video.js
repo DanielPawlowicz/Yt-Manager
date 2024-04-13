@@ -18,7 +18,6 @@ class Video {
                 if(!ifVideoExists.data){
                     // add video to database
                     await Service.addVideoToDb({ytId, title, link, duration, thumbnailUrl});
-                    alert("Video added to database successfully");
                 }
 
                 // get the max orderIndex from this playlist
@@ -30,7 +29,6 @@ class Video {
 
             } catch (er) {
                 console.error("Error adding to database: " + er);
-                alert("Filed to add video to database");
             }
       };
     
