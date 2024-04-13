@@ -23,12 +23,12 @@ const Navbar = () => {
     
         <h1 className='title'>YT Manager</h1>
 
-        <h2>Playlists</h2>
+        <h2 className='playlists-title'>Playlists</h2>
 
         {playlists.map((playlist) => (
             <h4 className='playlist-item-nav' key={playlist.id}>{playlist.playlistName}</h4>
         ))}
-
+        
     
     </div>
   )
