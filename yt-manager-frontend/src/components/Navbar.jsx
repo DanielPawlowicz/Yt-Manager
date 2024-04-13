@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Service from '../service/Service';
 import SearchIcon from '@mui/icons-material/Search';
-import { Icon } from '@mui/material';
 
-const Navbar = ({ setSelectedPlaylist, setShowSearch }) => {
+const Navbar = ({ handlePlaylistClick, handleTitleClick }) => {
 
     const [playlists, setPlaylists] = useState([]);
 
@@ -20,15 +19,15 @@ const Navbar = ({ setSelectedPlaylist, setShowSearch }) => {
         }
     }
 
-    const handleTitleClick = () => {
-        setShowSearch(true); // Update state to show SearchYoutube component
-        setSelectedPlaylist(null); // Reset selected playlist
-    };
+    // const handleTitleClick = () => {
+    //     setShowSearch(true); // Update state to show SearchYoutube component
+    //     setSelectedPlaylist(null); // Reset selected playlist
+    // };
 
-    const handlePlaylistClick = (playlist) => {
-        setSelectedPlaylist(playlist); // Update the selected playlist
-        setShowSearch(false); // Set showSearch to false to hide the SearchYoutube component
-    };
+    // const handlePlaylistClick = (playlist) => {
+    //     setSelectedPlaylist(playlist); // Update the selected playlist
+    //     setShowSearch(false); // Set showSearch to false to hide the SearchYoutube component
+    // };
 
   return (
     <div className='Navbar'>
