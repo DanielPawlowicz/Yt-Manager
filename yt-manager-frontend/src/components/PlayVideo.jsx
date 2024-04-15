@@ -38,9 +38,11 @@ const PlayVideo = ({ video }) => {
         // Now the player is ready to receive API calls
         console.log('Player ready');
 
-        // You can access the player instance via event.target
-        // For example, to get the current time:
-        // const currentTime = event.target.getCurrentTime();
+        // Check if a bookmark exists
+        if (video.bookmark !== null) {
+            // Seek to the bookmark time
+            event.target.seekTo(video.bookmark);
+        }
     };
 
     const handleBookmarkClick = async () => {
