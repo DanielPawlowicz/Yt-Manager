@@ -52,6 +52,10 @@ class Service {
         return axios.delete(API_URL+"/videos/delete/"+videoYtId);
     }
 
+    countVideos(playlistId){
+        return axios.get(API_URL+"/playlists/count/"+playlistId);
+    }
+
 }
 
 export default new Service;

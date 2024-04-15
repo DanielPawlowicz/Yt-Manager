@@ -49,4 +49,12 @@ public class PlaylistController {
         playlistService.deletePlaylist(playlistId);
         return ResponseEntity.noContent().build();
     }
+
+
+    // count videos on specific playlist
+    @GetMapping("/count/{playlistId}")
+    public ResponseEntity<Long> getVideoCountByPlaylistId(@PathVariable Long playlistId) {
+        long videoCount = playlistService.getVideoCountByPlaylistId(playlistId);
+        return ResponseEntity.ok(videoCount);
+    }
 }

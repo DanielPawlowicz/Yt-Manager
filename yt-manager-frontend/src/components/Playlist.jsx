@@ -7,11 +7,15 @@ import PlayVideo from './PlayVideo';
 const Playlist = ({ playlist }) => {
     const [videos, setVideos] = useState([]);
     const [selectedVideo, setSelectedVideo] = useState(null);
+    const [videoCount, setVideoCount] = useState(null);
+    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         if (playlist) {
             console.log("Selected playlist id: " + playlist.id);
             getPlaylistVideos();
+            getVideosCount();
         }
     }, [playlist]);
 
@@ -24,6 +28,18 @@ const Playlist = ({ playlist }) => {
             console.error(`Error fetching video IDs for playlist of id: ${playlist.id}`, err);
         }
     };
+
+    const getVideosCount = async () => {
+        try {
+            const response = await Service.countVideos(playlist.id);
+            setVideoCount(response.data);
+            setLoading(false); // Set loading to false after count is fetched
+        } catch (err) {
+            console.error("error getting the video count ", err);
+            setVideoCount(0); // Set count to 0 in case of error
+            setLoading(false); // Set loading to false
+        }
+    }
 
     const getVideosDetails = async (ids) => {
         try {
@@ -91,6 +107,12 @@ const Playlist = ({ playlist }) => {
     return (
         <div className="main">
             <h1>{playlist.playlistName}</h1>
+            
+                {loading ? (
+                    <p>Loading...</p> // Render loading state while count is being fetched
+                ) : (
+                    <h2 className='videos-count'>Videos: {videoCount}</h2> // Render the count when it's available
+                )}
 
             {selectedVideo && <PlayVideo video={selectedVideo} />}
 

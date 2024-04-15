@@ -53,4 +53,9 @@ public class PlaylistService {
         playlistRepository.deleteById(playlistId);
     }
 
+    // count videos on the specific playlist
+    public long getVideoCountByPlaylistId(Long playlistId) {
+        return videoPlaylistRepository.countByPlaylistId(playlistId);
+    }
+
 }

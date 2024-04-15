@@ -33,4 +33,6 @@ public interface VideoPlaylistRepository extends JpaRepository<VideoPlaylist, Lo
     @Query("SELECT DISTINCT vp.playlistId FROM VideoPlaylist vp WHERE vp.ytId = :ytId")
     List<Long> findDistinctPlaylistIdsByYtId(String ytId);
 
+    long countByPlaylistId(Long playlistId);
+
 }
