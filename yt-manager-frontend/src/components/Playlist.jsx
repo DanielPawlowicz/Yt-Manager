@@ -72,6 +72,21 @@ const Playlist = ({ playlist }) => {
         markVideoAsWatched(video.ytId, newWatchedStatus);
     };
     
+    const handleDeleteButtonClick = async (videoYtId, playlistId) => {
+        try{
+
+            // Call deleteVideo function with the videoYtId and playlistId
+            await Service.deleteVideo(videoYtId, playlistId);
+
+            console.log("Video of ytId " + videoYtId + " - deleted successfully from playlist " + playlistId);
+
+            // Refresh the playlist after deleting the video
+            getPlaylistVideos();
+
+        }catch(err){
+            console.error("Error deleting Video of ytId " + videoYtId + " from playlist " + playlistId)
+        }
+    };
 
     return (
         <div className="main">
@@ -98,6 +113,9 @@ const Playlist = ({ playlist }) => {
                                         <button onClick={() => handleButtonClick(video)}>
                                             {video.watched ? 'Set unwatched' : 'Set watched'}
                                         </button>
+                                        <br/>
+                                        <button onClick={() => handleDeleteButtonClick(video.ytId, playlist.id)}>Delete</button>
+
                                     </div>
                                     </td>
                                 </tr>

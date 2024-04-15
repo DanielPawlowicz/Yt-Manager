@@ -48,6 +48,10 @@ class Service {
         return axios.put(API_URL+"/videos/edit/ytId/"+ytId, updatedVideo);
     }
 
+    deleteVideo(videoYtId, playlistId){
+        return axios.delete(API_URL+"/videos/delete/"+videoYtId+"/"+playlistId);
+    }
+
 }
 
 export default new Service;
