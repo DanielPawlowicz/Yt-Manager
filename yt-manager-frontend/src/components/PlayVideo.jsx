@@ -6,17 +6,18 @@ const PlayVideo = ({ video }) => {
     const [bookmarking, setBookmarking] = useState(false);
     const playerRef = useRef(null);
 
+    
     useEffect(() => {
         // Load the YouTube iframe API script dynamically
         const script = document.createElement('script');
         script.src = 'https://www.youtube.com/iframe_api';
         document.body.appendChild(script);
-
+        
         // Initialize the YouTube player when the script is loaded
         script.onload = () => {
             window.onYouTubeIframeAPIReady = initializePlayer;
         };
-
+        
         // Clean up function to remove the script
         return () => {
             document.body.removeChild(script);
@@ -24,6 +25,30 @@ const PlayVideo = ({ video }) => {
         };
     }, []);
 
+    useEffect(() => {
+    // Reset bookmarking state when video changes
+    setBookmarking(false);
+
+    // Reset the bookmark on the server
+    // resetBookmark();
+}, [video]);
+
+const resetBookmark = async () => {
+    try {
+        // Create a bookmark object with video details and a null bookmark
+        const videoBookmark = { ...video, bookmark: null };
+
+        // Make a PUT request to save the bookmark
+        const response = await Service.editByYtId(video.ytId, videoBookmark);
+
+        // Handle success
+        console.log('Bookmark reset:', response.data);
+    } catch (error) {
+        // Handle error
+        console.error('Error resetting bookmark:', error);
+    }
+};
+    
     // Function to initialize the YouTube player
     const initializePlayer = () => {
         playerRef.current = new window.YT.Player('youtube-player', {
@@ -37,6 +62,7 @@ const PlayVideo = ({ video }) => {
     const onPlayerReady = (event) => {
         // Now the player is ready to receive API calls
         console.log('Player ready');
+        console.log(video);
 
         // Check if a bookmark exists
         if (video.bookmark !== null) {
@@ -78,7 +104,7 @@ const PlayVideo = ({ video }) => {
                 id="youtube-player"
                 width="840"
                 height="472"
-                src={`https://www.youtube.com/embed/${video.ytId}?enablejsapi=1`}
+                src={`https://www.youtube.com/embed/${video.ytId}?enablejsapi=1&t=3`}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
