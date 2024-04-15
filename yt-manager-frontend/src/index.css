@@ -210,3 +210,12 @@ opacity: 1;
 
 
 /* play video */
+
+
+/* watched video */
+.watched{
+  filter: grayscale(1);
+  background-color: #cdcdcd;
+}
+
+

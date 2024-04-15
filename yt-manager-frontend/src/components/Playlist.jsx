@@ -43,14 +43,14 @@ const Playlist = ({ playlist }) => {
         setSelectedVideo(video);
     };
     
-    const markVideoAsWatched = async (videoYtId) => {
+    const markVideoAsWatched = async (videoYtId, watched) => {
         try {
             // Fetch the existing video data
             const existingVideoResponse = await Service.getVideoByYtId(videoYtId);
             const existingVideo = existingVideoResponse.data;
             
             // Set the watched field to true
-            existingVideo.watched = true;
+            existingVideo.watched = watched;
 
             // Make a PUT request to update the video with all fields
             const response = await Service.editByYtId(videoYtId, existingVideo);
@@ -63,6 +63,14 @@ const Playlist = ({ playlist }) => {
             console.error('Error marking video as watched:', error);
         }
     };
+
+    const handleButtonClick = (video) => {
+        // Toggle the watched property
+        const newWatchedStatus = !video.watched;
+    
+        // Call markVideoAsWatched function with the updated watched status
+        markVideoAsWatched(video.ytId, newWatchedStatus);
+    };
     
 
     return (
@@ -73,7 +81,7 @@ const Playlist = ({ playlist }) => {
 
             <ul>
                 {videos.map((video) => (
-                        <li key={video.id} className='video-render'>
+                        <li key={video.id} className={`video-render ${video.watched ? 'watched' : ''}`}>
                             <table>
                                 <tr>
                                     <td className='clickable-td'>
@@ -86,15 +94,11 @@ const Playlist = ({ playlist }) => {
                                         </div>
                                     </td>
                                     <td className='buttons-td'>
-                                        <div className="buttons-playlist">
-                                            <button onClick={() => markVideoAsWatched(video.ytId)}>Mark as Watched</button>
-                                            {/* add buttons and other:
-                                                + unmark as watched
-                                                + delete
-                                                + change order (functionality) 
-                                                + add to other playlists
-                                            */}
-                                        </div>
+                                    <div className="buttons-playlist">
+                                        <button onClick={() => handleButtonClick(video)}>
+                                            {video.watched ? 'Set unwatched' : 'Set watched'}
+                                        </button>
+                                    </div>
                                     </td>
                                 </tr>
                             </table>
