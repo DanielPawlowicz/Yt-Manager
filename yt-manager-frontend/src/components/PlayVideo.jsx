@@ -7,17 +7,15 @@ const PlayVideo = ({ video }) => {
     const playerRef = useRef(null);
 
     useEffect(() => {
-        // Load the YouTube iframe API script dynamically
+        // Dynamically load the YouTube iframe API script
         const script = document.createElement('script');
         script.src = 'https://www.youtube.com/iframe_api';
         document.body.appendChild(script);
 
-        // Initialize the YouTube player when the script is loaded
-        script.onload = () => {
-            window.onYouTubeIframeAPIReady = initializePlayer;
-        };
+        // Callback function to initialize the player when the script is loaded
+        window.onYouTubeIframeAPIReady = initializePlayer;
 
-        // Clean up function to remove the script
+        // Clean up function to remove the script and the callback
         return () => {
             document.body.removeChild(script);
             delete window.onYouTubeIframeAPIReady;
@@ -26,23 +24,23 @@ const PlayVideo = ({ video }) => {
 
     // Function to initialize the YouTube player
     const initializePlayer = () => {
-        playerRef.current = new window.YT.Player('youtube-player', {
-            events: {
-                onReady: onPlayerReady
-            }
-        });
+        // Ensure the YouTube iframe API is available
+        if (window.YT && window.YT.Player) {
+            // Initialize the player
+            playerRef.current = new window.YT.Player('youtube-player', {
+                events: {
+                    onReady: onPlayerReady
+                }
+            });
+        } else {
+            console.error('YouTube iframe API not available.');
+        }
     };
 
     // Function to handle the onReady event of the player
     const onPlayerReady = (event) => {
         // Now the player is ready to receive API calls
         console.log('Player ready');
-
-        // Check if a bookmark exists
-        if (video.bookmark !== null) {
-            // Seek to the bookmark time
-            event.target.seekTo(video.bookmark);
-        }
     };
 
     const handleBookmarkClick = async () => {
@@ -54,6 +52,7 @@ const PlayVideo = ({ video }) => {
 
                 // Create a bookmark object with video details and current time
                 const videoBookmark = { ...video, bookmark: currentTime };
+                console.log(videoBookmark);
 
                 // Make a PUT request to save the bookmark
                 const response = await Service.editByYtId(video.ytId, videoBookmark);
@@ -83,8 +82,9 @@ const PlayVideo = ({ video }) => {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
             ></iframe>
+            <p>Bookmark: {video.bookmark}</p>
             <button onClick={handleBookmarkClick} disabled={bookmarking}>
-                {bookmarking ? 'Bookmarking...' : 'Bookmark'}
+                {bookmarking ? 'Bookmarking...' : 'Add Bookmark'}
             </button>
         </div>
     );

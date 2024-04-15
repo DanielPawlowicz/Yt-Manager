@@ -27,6 +27,12 @@ class Video {
                 // add video to playlist
                 await Service.addVideoToPlaylist(ytId, playlistId, order);
 
+                if(playlistId != 1){
+                  let order2 = await Service.maxOrder(1);
+                  order2 = order2.data + 1;
+                  await Service.addVideoToPlaylist(ytId, 1, order);
+                }
+
                 showNotification("Video added successfully");
 
             } catch (er) {

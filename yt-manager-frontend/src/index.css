@@ -224,3 +224,7 @@ opacity: 1;
   font-size: 1.3rem;
 }
 
+.video-info p{
+  display: block;
+  margin: 6px;
+}

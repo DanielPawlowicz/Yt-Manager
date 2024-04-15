@@ -12,6 +12,9 @@ const Playlist = ({ playlist }) => {
 
 
     useEffect(() => {
+        // Reset selectedVideo when the playlist changes
+        setSelectedVideo(null);
+    
         if (playlist) {
             console.log("Selected playlist id: " + playlist.id);
             getPlaylistVideos();
@@ -98,6 +101,7 @@ const Playlist = ({ playlist }) => {
 
             // Refresh the playlist after deleting the video
             getPlaylistVideos();
+            getVideosCount();
 
         }catch(err){
             console.error("Error deleting Video of ytId " + videoYtId);
@@ -127,6 +131,9 @@ const Playlist = ({ playlist }) => {
                                             <div className="video-info">
                                                 <p className='video-title'>{video.title}</p>
                                                 <p>{Video.parseDuration(video.duration)}</p>
+                                                {video.bookmark != null ?
+                                                <p>Bookmark: {video.bookmark}</p>
+                                                : "" }
                                             </div>
                                         </div>
                                     </td>
