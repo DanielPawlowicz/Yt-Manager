@@ -76,15 +76,15 @@ const Playlist = ({ playlist }) => {
         try{
 
             // Call deleteVideo function with the videoYtId and playlistId
-            await Service.deleteVideo(videoYtId, playlistId);
+            await Service.deleteVideo(videoYtId);
 
-            console.log("Video of ytId " + videoYtId + " - deleted successfully from playlist " + playlistId);
+            console.log("Video of ytId " + videoYtId + " - deleted successfully");
 
             // Refresh the playlist after deleting the video
             getPlaylistVideos();
 
         }catch(err){
-            console.error("Error deleting Video of ytId " + videoYtId + " from playlist " + playlistId)
+            console.error("Error deleting Video of ytId " + videoYtId);
         }
     };
 
@@ -114,7 +114,7 @@ const Playlist = ({ playlist }) => {
                                             {video.watched ? 'Set unwatched' : 'Set watched'}
                                         </button>
                                         <br/>
-                                        <button onClick={() => handleDeleteButtonClick(video.ytId, playlist.id)}>Delete</button>
+                                        <button onClick={() => handleDeleteButtonClick(video.ytId)}>Delete</button>
 
                                     </div>
                                     </td>

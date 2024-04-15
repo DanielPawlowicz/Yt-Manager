@@ -30,5 +30,7 @@ public interface VideoPlaylistRepository extends JpaRepository<VideoPlaylist, Lo
 
     void deleteByYtIdAndPlaylistId(String ytId, Long playlistId);
 
+    @Query("SELECT DISTINCT vp.playlistId FROM VideoPlaylist vp WHERE vp.ytId = :ytId")
+    List<Long> findDistinctPlaylistIdsByYtId(String ytId);
 
 }

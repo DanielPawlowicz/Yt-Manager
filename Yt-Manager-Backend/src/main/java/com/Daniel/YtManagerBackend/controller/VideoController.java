@@ -48,11 +48,12 @@ public class VideoController {
     }
 
     // delete video by Yt Id
-    @DeleteMapping("/delete/{ytId}/{playlistId}")
-    public ResponseEntity<Void> deleteVideo(@PathVariable String ytId, @PathVariable Long playlistId) {
-        videoService.deleteVideoByYtId(ytId, playlistId);
+    @DeleteMapping("/delete/{ytId}")
+    public ResponseEntity<Void> deleteVideo(@PathVariable String ytId) {
+        videoService.deleteVideoByYtId(ytId);
         return ResponseEntity.noContent().build();
     }
+
 
     // check if there is record of ytId in db
     @GetMapping("/exists/{ytId}")

@@ -53,27 +53,34 @@ public class VideoService {
         return videoRepository.save(existingVideo);
     }
 
+    // delete video by ytId from all of the assigned playlists
     @Transactional
-    public void deleteVideoByYtId(String ytId, Long playlistId) {
-        // Get the order index of the video being deleted
-        int deletedOrderIndex = videoPlaylistRepository.findOrderIndexByYtIdAndPlaylistId(ytId, playlistId);
+    public void deleteVideoByYtId(String ytId) {
+        // Get the list of playlists that the video is associated with
+        List<Long> playlistIds = videoPlaylistRepository.findDistinctPlaylistIdsByYtId(ytId);
 
-        // Delete the video from the video table
-        videoRepository.deleteByYtId(ytId);
+        // Loop through each playlist
+        for (Long playlistId : playlistIds) {
+            // Get the order index of the video being deleted
+            int deletedOrderIndex = videoPlaylistRepository.findOrderIndexByYtIdAndPlaylistId(ytId, playlistId);
 
-        // Delete the association record
-        videoPlaylistRepository.deleteByYtIdAndPlaylistId(ytId, playlistId);
+            // Delete the video from the video table
+            videoRepository.deleteByYtId(ytId);
 
-        // Get all videos assigned to the same playlist with order index higher than deletedOrderIndex
-        List<VideoPlaylist> videosToUpdate = videoPlaylistRepository.findByPlaylistIdAndOrderIndexGreaterThanOrderByOrderIndexAsc(playlistId, deletedOrderIndex);
+            // Delete the association record
+            videoPlaylistRepository.deleteByYtIdAndPlaylistId(ytId, playlistId);
 
-        // Decrement the order index of each video
-        for (VideoPlaylist video : videosToUpdate) {
-            video.setOrderIndex(video.getOrderIndex() - 1);
+            // Get all videos assigned to the same playlist with order index higher than deletedOrderIndex
+            List<VideoPlaylist> videosToUpdate = videoPlaylistRepository.findByPlaylistIdAndOrderIndexGreaterThanOrderByOrderIndexAsc(playlistId, deletedOrderIndex);
+
+            // Decrement the order index of each video
+            for (VideoPlaylist video : videosToUpdate) {
+                video.setOrderIndex(video.getOrderIndex() - 1);
+            }
+
+            // Update the videos in the database
+            videoPlaylistRepository.saveAll(videosToUpdate);
         }
-
-        // Update the videos in the database
-        videoPlaylistRepository.saveAll(videosToUpdate);
     }
 
     // find video by yt Id
