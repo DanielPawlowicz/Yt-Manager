@@ -71,6 +71,14 @@ const PlayVideo = ({ video }) => {
         }
     };
 
+    // Function to handle clicking on the bookmark paragraph
+    const handleBookmarkParagraphClick = () => {
+        // Seek the video to the bookmarked time
+        if (playerRef.current && video.bookmark !== null) {
+            playerRef.current.seekTo(video.bookmark);
+        }
+    };
+
     return (
         <div className="play-video">
             <iframe
@@ -82,7 +90,7 @@ const PlayVideo = ({ video }) => {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
             ></iframe>
-            <p>Bookmark: {video.bookmark}</p>
+            <p onClick={handleBookmarkParagraphClick}>Bookmark: <a href="#">{video.bookmark}</a></p>
             <button onClick={handleBookmarkClick} disabled={bookmarking}>
                 {bookmarking ? 'Bookmarking...' : 'Add Bookmark'}
             </button>
