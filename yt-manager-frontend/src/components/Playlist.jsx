@@ -95,7 +95,8 @@ const Playlist = ({ playlist }) => {
         try{
 
             // Call deleteVideo function with the videoYtId and playlistId
-            await Service.deleteVideo(videoYtId);
+            // await Service.deleteVideo(videoYtId);
+            await Service.removeVideoFromPlaylist(videoYtId, playlistId);
 
             console.log("Video of ytId " + videoYtId + " - deleted successfully");
 
@@ -143,7 +144,7 @@ const Playlist = ({ playlist }) => {
                                             {video.watched ? 'Set unwatched' : 'Set watched'}
                                         </button>
                                         <br/>
-                                        <button onClick={() => handleDeleteButtonClick(video.ytId)}>Delete</button>
+                                        <button onClick={() => handleDeleteButtonClick(video.ytId, playlist.id)}>Delete</button>
 
                                     </div>
                                     </td>

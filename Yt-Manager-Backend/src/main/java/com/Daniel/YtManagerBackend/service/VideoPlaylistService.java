@@ -4,6 +4,7 @@ import com.Daniel.YtManagerBackend.controller.exception.NotFoundException;
 import com.Daniel.YtManagerBackend.model.Playlist;
 import com.Daniel.YtManagerBackend.model.VideoPlaylist;
 import com.Daniel.YtManagerBackend.repository.VideoPlaylistRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +57,12 @@ public class VideoPlaylistService {
     // search for max orderIndex for specific playlist, and if no records then return 0
     public int getMaxOrderIndexByPlaylistId(Long playlistId) {
         return videoPlaylistRepository.findMaxOrderIndexByPlaylistId(playlistId);
+    }
+
+    // remove video from playlist
+    @Transactional
+    public void deleteAssociationByVideoYtIdAndPlaylistId(String videoYtId, Long playlistId) {
+        videoPlaylistRepository.deleteByYtIdAndPlaylistId(videoYtId, playlistId);
     }
 
 }

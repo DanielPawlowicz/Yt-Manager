@@ -77,17 +77,7 @@ class Video {
       
         return durationString.trim();
       };   
-    
-    //   createPlaylist  = async (video, playlistName) => {
-    //     try{
-    //         let playlistId = await Service.createNewPlaylist(playlistName);
-    //         addToPlaylist(video, playlistId)
-            
-    //     } catch (er){
-    //         console.error("Error creating new playlist: ", er);
-    //     }
-
-    //   }
+  
 
 }
 

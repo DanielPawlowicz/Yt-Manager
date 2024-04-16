@@ -75,7 +75,6 @@ const SearchYoutube = ({ onPlaylistCreated }) => {
         setPlaylists(response.data);
         setSelectedVideo(item);
         setShowPlaylistDialog(true);
-        // console.log("worked");
       } catch (error) {
         console.error('Error fetching playlists:', error);
       }

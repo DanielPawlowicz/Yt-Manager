@@ -66,4 +66,11 @@ public class VideoPlaylistController {
     public int getMaxOrderIndexByPlaylistId(@PathVariable Long playlistId) {
         return videoPlaylistService.getMaxOrderIndexByPlaylistId(playlistId);
     }
+
+    // delete video from playlist
+    @DeleteMapping("/remove")
+    public ResponseEntity<Void> removeVideoFromPlaylist(@RequestParam String videoYtId, @RequestParam Long playlistId) {
+        videoPlaylistService.deleteAssociationByVideoYtIdAndPlaylistId(videoYtId, playlistId);
+        return ResponseEntity.noContent().build();
+    }
 }
