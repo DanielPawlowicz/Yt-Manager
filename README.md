@@ -12,7 +12,7 @@
 * Set a time "bookmark" for the video
 * See which videos has bookmarks
 
-### Link to the online demo:
+### Online demo:
 #### *soon*
 
 #### How to set it up locally:
@@ -20,7 +20,7 @@
 2. Run the Xampp Apache and MySQL
 3. Use the MySQL workbench with example database "ytmanager_db.sql"
 4. Run the Java Spring Boot app
-5. Run the Frontend with commend "npm start"
+5. Run the Frontend with command "npm start"
 6. Use it in your browser
 
 #### Future features:
