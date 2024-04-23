@@ -34,7 +34,7 @@
 ![Zrzut ekranu 2024-04-23 181819](https://github.com/DanielPawlowicz/Yt-Manager-FullStack/assets/91285163/77ae2b41-3667-4af4-8d73-98e94f24a95c)
 
 #### When we click  "+ To Watch" button, the video will be added to playlist "To Watch"
-But if we put the cursor over the "+ Playlists" button there will show a dialog box with already existing playlists, that when clicked the video will be added to them. But over them, there is a input to create new playlist, and add video to it.
+#### But if we put the cursor over the "+ Playlists" button there will show a dialog box with already existing playlists, that when clicked the video will be added to them. But over them, there is a input to create new playlist, and add video to it.
 ![Zrzut ekranu 2024-04-23 182347](https://github.com/DanielPawlowicz/Yt-Manager-FullStack/assets/91285163/d9635056-c436-47cd-a6a8-d11ab44f2f90)
 
 #### Here is the video added to the playlist. Under the playlist name we can see how many videos it contains
