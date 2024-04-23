@@ -74,17 +74,11 @@ code {
 
 /* search */
 
-.search-container{
-  position: relative;
-  top:40vh;
-  left: 20vw;
-}
-
 .search-input{
   position: relative;
   width: 30vw;
-  height: 45px;
-  font-size: 35px;
+  height: 36px;
+  font-size: 30px;
   padding: 0 10px;
   border-radius:40px;
   z-index: 10;
@@ -92,8 +86,8 @@ code {
 }
 
 .search-btn{
-  height: 49px;
-  font-size: 35px;
+  height: 39px;
+  font-size: 30px;
   border-radius:40px;
   margin-left: -40px;
   padding-left: 50px;
