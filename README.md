@@ -28,3 +28,5 @@
 * delete the video from the db if it is not assigned to any playlist
 * changing the video order if it is watched to go to the end of the playlist
 * adding the watched video to the playlist "watched"
+
+![Zrzut ekranu 2024-04-23 181708](https://github.com/DanielPawlowicz/Yt-Manager-FullStack/assets/91285163/423d5ce4-9664-4649-8bc7-3fc5bcd74dcb)
