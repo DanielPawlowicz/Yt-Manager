@@ -105,10 +105,12 @@ const SearchYoutube = ({ onPlaylistCreated }) => {
   
     return (
       <div>
-        <form onSubmit={handleSubmit}>
-          <input className="search-input" type="text" value={query} onChange={handleChange} />
-          <button className='search-btn' type="submit">Search</button>
-        </form>
+        <div className='search-container'>
+          <form onSubmit={handleSubmit}>
+            <input className="search-input" type="text" value={query} onChange={handleChange} />
+            <button className='search-btn' type="submit">Search</button>
+          </form>
+        </div>
         <ul>
           {results.map((item) => (
             <li className="video-render" key={item.id.videoId}>

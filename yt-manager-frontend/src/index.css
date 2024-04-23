@@ -74,23 +74,29 @@ code {
 
 /* search */
 
+.search-container{
+  position: relative;
+  top:40vh;
+  left: 20vw;
+}
+
 .search-input{
   position: relative;
   width: 30vw;
-  height: 25px;
-  font-size: 20px;
+  height: 45px;
+  font-size: 35px;
   padding: 0 10px;
-  border-radius: 15px;
+  border-radius:40px;
   z-index: 10;
   border: 2px solid #555;
 }
 
 .search-btn{
-  height: 29px;
-  font-size: 20px;
-  border-radius: 15px;
-  margin-left: -20px;
-  padding-left: 30px;
+  height: 49px;
+  font-size: 35px;
+  border-radius:40px;
+  margin-left: -40px;
+  padding-left: 50px;
   padding-right: 10px;
   z-index: 1;
   font-weight: bold;
